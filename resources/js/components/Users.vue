@@ -53,7 +53,10 @@
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+
+            <form action="" @submit.prevent="createUser">
+
+                <div class="modal-body">
                 <form @submit.prevent="login" @keydown="form.onKeydown($event)">
 
                     <div class="form-group">
@@ -91,13 +94,17 @@
                         <has-error :form="form" field="password"></has-error>
                     </div>
 
-                <button :disabled="form.busy" type="submit" class="btn btn-primary">Log In</button>
-            </form>
+                    <button :disabled="form.busy" type="submit" class="btn btn-primary">Log In</button>
+                </form>
             </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
             </div>
+
+            </form>
+
             </div>
         </div>
         </div>
@@ -118,6 +125,13 @@
                     bio: '',
                     photo: ''
                 })
+            }
+        },
+        methods: {
+            createUser() {
+                // Submit the form via a POST request
+                this.form.post('/api/user')
+                    .then(({ data }) => { console.log(data) })
             }
         },
         mounted() {
