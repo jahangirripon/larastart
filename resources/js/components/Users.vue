@@ -138,8 +138,10 @@
 
             createUser() {
                 // Submit the form via a POST request
+                this.$Progress.start();
                 this.form.post('/api/user')
-                    .then(({ data }) => { console.log(data) })
+                    .then(({ data }) => { console.log(data) });
+                this.$Progress.finish();
             }
         },
         created() {

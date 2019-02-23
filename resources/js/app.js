@@ -6,6 +6,22 @@ import { Form, HasError, AlertError } from 'vform'
 window.Form = Form
 import VueRouter from 'vue-router'
 
+import VueProgressBar from 'vue-progressbar';
+const options = {
+  color: '#bffaf3',
+  failedColor: '#874b4b',
+  thickness: '5px',
+  transition: {
+    speed: '0.2s',
+    opacity: '0.6s',
+    termination: 300
+  },
+  autoRevert: true,
+  location: 'top',
+  inverse: false
+}
+Vue.use(VueProgressBar, options)
+
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 
