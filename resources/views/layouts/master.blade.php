@@ -30,6 +30,17 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
       </li>
+      <li class="nav-item">
+                <a class="nav-link" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                      document.getElementById('logout-form').submit();">
+                  <p>
+                    {{ __('Logout') }}
+                  </p>            
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+          </li>
     </ul>
 
     <!-- SEARCH FORM -->
@@ -54,7 +65,7 @@
     <a href="index3.html" class="brand-link">
       <img src="./img/user.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">LaraStart</span>
+      <span class="brand-text font-weight-light">DurbarEx</span>
     </a>
 
     <!-- Sidebar -->
@@ -72,8 +83,7 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -83,37 +93,35 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Active Page</p>
-                </a>
+
+                <li class="nav-item">
+                <router-link to="/agents" class="nav-link">
+                  <i class="nav-icon fa fa-user"></i>
+                  <p>
+                    Agents
+                  </p>
+                </router-link>
               </li>
+
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Inactive Page</p>
-                </a>
+                  <router-link to="/orders" class="nav-link">
+                      <i class="nav-icon fa fa-users"></i>
+                      <p>
+                        Orders
+                      </p>
+                    </router-link>
               </li>
+
+              <li class="nav-item">
+                <router-link to="/status" class="nav-link">
+                  <i class="nav-icon fa fa-columns"></i>
+                  <p>
+                    Status
+                  </p>
+                </router-link>
+              </li>
+
             </ul>
-          </li>
-
-          <li class="nav-item">
-            <router-link to="/dashboard" class="nav-link">
-              <i class="nav-icon fa fa-columns"></i>
-              <p>
-                Dashboard
-              </p>
-            </router-link>
-          </li>
-
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-cog"></i>
-              <p>
-                Settings
-              </p>
-            </a>
           </li>
 
           <li class="nav-item">
@@ -126,23 +134,24 @@
           </li>
 
           <li class="nav-item">
-
-            <a class="nav-link" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-
-            <i class="nav-icon fa fa-power-off"></i>
-              <p>
-              {{ __('Logout') }}
-              </p>
-
-            
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
-
-
+              <router-link to="/users" class="nav-link">
+                  <i class="nav-icon fa fa-users"></i>
+                  <p>
+                    Users
+                  </p>
+                </router-link>
           </li>
+
+          <li class="nav-item">
+            <router-link to="/dashboard" class="nav-link">
+              <i class="nav-icon fa fa-columns"></i>
+              <p>
+                Dashboard
+              </p>
+            </router-link>
+          </li>
+
+
 
         </ul>
       </nav>
