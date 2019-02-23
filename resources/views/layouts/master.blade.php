@@ -1,14 +1,11 @@
 
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <title>Lara Starter</title>
 
@@ -18,7 +15,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini">
-<div class="wrapper">
+<div class="wrapper"  id="app">
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
@@ -102,6 +99,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
 
           <li class="nav-item">
+            <router-link to="/dashboard" class="nav-link">
+              <i class="nav-icon fa fa-columns"></i>
+              <p>
+                Dashboard
+              </p>
+            </router-link>
+          </li>
+
+          <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-cog"></i>
               <p>
@@ -111,12 +117,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <router-link to="/profile" class="nav-link">
               <i class="nav-icon fa fa-user"></i>
               <p>
                 Profile
               </p>
-            </a>
+            </router-link>
           </li>
 
           <li class="nav-item">
@@ -147,6 +153,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
+
+
+      <router-view></router-view>
+
 
       </div><!-- /.container-fluid -->
     </div>
