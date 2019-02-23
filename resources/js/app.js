@@ -1,13 +1,7 @@
-
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 require('./bootstrap');
 
 window.Vue = require('vue');
+import moment from 'moment';
 import { Form, HasError, AlertError } from 'vform'
 window.Form = Form
 import VueRouter from 'vue-router'
@@ -30,6 +24,14 @@ let routes = [
     mode: 'history',
     routes // short for `routes: routes`
   })
+
+  Vue.filter('upText', function(string){
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  });
+
+  Vue.filter('myDate', function(created){
+    return moment(created).format('LL');
+  });
 
 /**
  * The following block of code may be used to automatically register your
