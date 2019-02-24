@@ -137,10 +137,17 @@
             },
 
             createUser() {
-                // Submit the form via a POST request
                 this.$Progress.start();
                 this.form.post('/api/user')
                     .then(({ data }) => { console.log(data) });
+
+                $('#addNew').modal('hide')
+
+                Toast.fire({
+                type: 'success',
+                title: 'User created successfully'
+                });
+
                 this.$Progress.finish();
             }
         },
