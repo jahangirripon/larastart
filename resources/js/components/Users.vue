@@ -192,10 +192,23 @@
                 this.editmode = true;
                 this.form.put("/api/user/"+this.form.id)
                 .then(() => {
-                    // success
+                    Fire.$emit('AfterCreate');
+                    $('#addNew').modal('hide');
+                    Swal.fire({
+                                type: 'success',
+                                title: 'Data updated successfully',
+                                text: 'Data updated successfully'
+                                });
+                    this.$Progress.finish();
                 })
                 .catch(() => {
                     this.$Progress.fail();
+                    Swal.fire({
+                                type: 'error',
+                                title: 'Oops...',
+                                text: 'Something went wrong!',
+                                footer: '<a href>Why do I have this issue?</a>'
+                                })
                 });
                 
             },
