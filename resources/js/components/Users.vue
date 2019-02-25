@@ -7,7 +7,7 @@
                 <h3 class="card-title">Users Table</h3>
 
                 <div class="card-tools">
-                    <button class="btn btn-success" data-toggle="modal" data-target="#addNew">Add user <i class="fas fa-user-plus"></i></button>
+                    <button class="btn btn-success" @click="newModal">Add user <i class="fas fa-user-plus"></i></button>
                 </div>
               </div>
               <!-- /.card-header -->
@@ -28,7 +28,7 @@
                     <td>{{ user.type }}</td>
                     <td>{{ user.created_at | myDate }}</td>
                     <td>
-                        <a href="#">
+                        <a href="#" @click="editModal(user)">
                             <i class="fa fa-edit"></i>
                         </a>
 
@@ -50,16 +50,17 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add new user</h5>
+                <h5 class="modal-title" v-show="!editmode" id="exampleModalLabel">Add new user</h5>
+                <h5 class="modal-title" v-show="editmode" id="exampleModalLabel">Update user</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
 
-            <form action="" @submit.prevent="createUser">
+            <form action="" @submit.prevent="editmode ? updateUser() : createUser() ">
 
                 <div class="modal-body">
-                <form @submit.prevent="login" @keydown="form.onKeydown($event)">
+                <!-- <form @submit.prevent="login" @keydown="form.onKeydown($event)"> -->
 
                     <div class="form-group">
                         <input v-model="form.name" type="text" name="name" placeholder="Enter your name"
@@ -96,13 +97,14 @@
                         <has-error :form="form" field="password"></has-error>
                     </div>
 
-                    <button :disabled="form.busy" type="submit" class="btn btn-primary">Log In</button>
-                </form>
+                    <!-- <button :disabled="form.busy" type="submit" class="btn btn-primary">Log In</button> -->
+                <!-- </form> -->
             </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
+                <button v-show="editmode" type="submit" class="btn btn-success">Update</button>
+                <button v-show="!editmode" type="submit" class="btn btn-primary">Create</button>
             </div>
 
             </form>
@@ -119,8 +121,10 @@
     export default {
         data() {
             return {
+                editmode: true,
                 users: {},
                 form: new Form({
+                    id: '',
                     name: '',
                     email: '',
                     password: '',
@@ -131,6 +135,21 @@
             }
         },
         methods: {
+
+            newModal() {
+               // data-toggle="modal" data-target="#addNew"
+               this.editMode = true;
+               this.form.reset();
+               $('#addNew').modal('show');
+            },
+            editModal(user) {
+
+                this.editMode = !this.editmode;
+               this.form.reset();
+               $('#addNew').modal('show');
+               this.form.fill(user);
+            },
+
             deleteUser(id) {
                 Swal.fire({
                 title: 'Are you sure?',
@@ -168,6 +187,19 @@
                 axios.get('/api/user').then(({data}) => (this.users = data.data));
             },
 
+            updateUser() {
+                // console.log('editing data');
+                this.editmode = true;
+                this.form.put("/api/user/"+this.form.id)
+                .then(() => {
+                    // success
+                })
+                .catch(() => {
+                    this.$Progress.fail();
+                });
+                
+            },
+
             createUser() {
                 this.$Progress.start();
                 this.form.post('/api/user')
@@ -181,9 +213,7 @@
                         this.$Progress.finish();
                     })
                     .catch(() =>  {
-
                     });
-
             }
         },
         created() {
