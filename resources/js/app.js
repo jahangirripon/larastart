@@ -41,6 +41,8 @@ Vue.use(VueProgressBar, options)
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 
+Vue.component('pagination', require('laravel-vue-pagination'));
+
 Vue.use(VueRouter)
 
 let routes = [
