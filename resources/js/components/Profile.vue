@@ -121,6 +121,12 @@
                             </div>
 
                             <div class="form-group">
+                                <input v-model="form.password" type="password" name="password" placeholder="password"
+                                    class="form-control" :class="{ 'is-invalid': form.errors.has('password') }">
+                                <has-error :form="form" field="password"></has-error>
+                            </div>
+
+                            <div class="form-group">
                                     <label for="photo" class="col-sm-2 control-label">Profile Photo</label>
                                     <div class="col-sm-12">
                                         <input type="file" v-on:change="updateProfile" name="photo" class="form-input">
@@ -166,12 +172,13 @@
         methods:  {
             updateInfo() 
             {
+                this.$Progress.start();
                 this.form.put('api/profile/')
                 .then(() => {
-
+                    this.$Progress.finish();
                 })
                 .catch(() => {
-
+                    this.$Progress.fail();
                 });
             },
 
