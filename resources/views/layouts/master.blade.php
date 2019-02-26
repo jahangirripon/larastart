@@ -218,7 +218,11 @@
 </div>
 <!-- ./wrapper -->
 
-<!-- REQUIRED SCRIPTS -->
+@auth
+  <script>
+    window.user = @json(auth()->user())
+  </script>
+@endauth
 
 <!-- jQuery -->
 <script src="/js/app.js"></script>

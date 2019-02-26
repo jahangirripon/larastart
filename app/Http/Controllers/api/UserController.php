@@ -12,6 +12,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth:api');
+        //$this->authorize('isAdmin');
     }
 
     /**
@@ -88,6 +89,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        //$this->authorize('isAdmin');
         $user = User::findOrFail($id);
 
         $user->delete();
