@@ -15,7 +15,7 @@
                                 <h5 class="widget-user-desc">Web Designer</h5>
                             </div>
                             <div class="widget-user-image">
-                                <img class="img-circle" src="" alt="User Avatar">
+                                <img class="img-circle" :src="getProfilePhoto()" alt="User Avatar">
                             </div>
                             <div class="card-footer">
                                 <div class="row">
@@ -201,12 +201,19 @@
                     this.form.photo = reader.result;
                 }
                 reader.readAsDataURL(file);
+            },
+
+            getProfilePhoto()
+            {
+                let photo = (this.form.photo.length > 200) ? this.form.photo : "img/profile/" +this.form.photo; 
+                return photo;
             }
         },
 
         created() {
             axios.get("api/profile")
                 .then(({ data }) => (this.form.fill(data)));
+                
         }
     }
 </script>
