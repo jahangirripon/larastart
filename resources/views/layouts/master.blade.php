@@ -46,7 +46,7 @@
 
     <!-- SEARCH FORM -->
       <div class="input-group input-group-sm form-inline ml-3">
-        <input class="form-control form-control-navbar" v-model="search" @keyup.enter="searchit" type="search" placeholder="Search" aria-label="Search">
+        <input class="form-control form-control-navbar" v-model="search" @keyup="searchit" type="search" placeholder="Search" aria-label="Search">
         <div class="input-group-append">
           <button class="btn btn-navbar" @click="searchit">
             <i class="fa fa-search"></i>
